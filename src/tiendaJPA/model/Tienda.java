@@ -10,7 +10,8 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Tienda.findAll", query="SELECT t FROM Tienda t")
+@NamedQueries({@NamedQuery(name="Tienda.findAll", query="SELECT t FROM Tienda t"),
+@NamedQuery(name="Tienda.findEmail", query="SELECT t FROM Tienda t where t.email=:email")})
 public class Tienda implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

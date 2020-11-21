@@ -10,5 +10,13 @@ implements GenericDao<Tienda>  {
 	public TiendaDao() {
 		super(Tienda.class);
 	}
+	
+	public Tienda findEmail(String email){
+		Tienda t = new Tienda();
+		t = (Tienda) this.getEm().createNamedQuery("Tienda.findEmail")
+			.setParameter("email", email).getSingleResult();
+		
+		return t;
+	}
 
 }

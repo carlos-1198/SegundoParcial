@@ -82,17 +82,22 @@ public class TiendaController extends HttpServlet{
 	public void registrarTienda(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		Tienda tienda = new Tienda();
-		tienda.setClave(request.getParameter("InputPassword"));
-		tienda.setDescripcion(request.getParameter("inputDescripcion"));
-		tienda.setEmail(request.getParameter("inputEmail "));
-		tienda.setFacebook(request.getParameter("inputFacebook "));
-		tienda.setImagen("inputImagen");
-		tienda.setLema(request.getParameter("inputLema"));
-		tienda.setNombre(request.getParameter("inputNombre"));
-		tienda.setPropietario(request.getParameter("inputPropietario "));
-		tienda.setWeb(request.getParameter("inputWeb "));		
-		dao.insert(tienda);		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		if(dao.findEmail(request.getParameter("inputEmail")).getEmail()!=null) {
+			tienda.setClave(request.getParameter("inputPassword"));
+			tienda.setDescripcion(request.getParameter("inputDescripcion"));
+			tienda.setEmail(request.getParameter("inputEmail"));
+			tienda.setFacebook(request.getParameter("inputFacebook"));
+			tienda.setImagen("inputImagen");
+			tienda.setLema(request.getParameter("inputLema"));
+			tienda.setNombre(request.getParameter("inputNombre"));
+			tienda.setPropietario(request.getParameter("inputPropietario"));
+			tienda.setWeb(request.getParameter("inputWeb"));		
+			dao.insert(tienda);		
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("welcome.jsp");//si el correo ya esta registrado
+		}
+		
 
 	}
 	
@@ -105,11 +110,17 @@ public class TiendaController extends HttpServlet{
 	private void ingresar(HttpServletRequest request, HttpServletResponse response) 
 			 throws ServletException, IOException {
 		Tienda tienda = new Tienda();
-		tienda = dao.find(request.getParameter("inputEmail"));
+		tienda = dao.findEmail(request.getParameter("inputEmail"));
 		String correo = tienda.getEmail();
 		String password = request.getParameter("inputPassword");
-		if(password.contentEquals(tienda.getClave())) {
-			
+		if(correo.contentEquals(tienda.getEmail())) {
+			if(password.contentEquals(tienda.getClave())) {
+				response.sendRedirect("index.jsp");//si esta bien
+			}else {
+				response.sendRedirect("servicios.jsp");
+			}
+		}else {
+			response.sendRedirect("servicios.jsp");
 		}
 		
 	}
