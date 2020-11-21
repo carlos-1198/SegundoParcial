@@ -12,7 +12,8 @@ import javax.persistence.*;
 @NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s")
 public class Servicio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Id
 	private int id;
 

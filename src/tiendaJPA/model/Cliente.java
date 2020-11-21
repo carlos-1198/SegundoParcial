@@ -13,7 +13,8 @@ import java.util.List;
 @NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Id
 	private int id;
 
