@@ -26,7 +26,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-3 align-self-center">
-            	<a href="registro.html" class="btn btn-lg btn-primary btn-block text-uppercase font-weight-bold mb-2 text-light" type="submit">Registrate</a>
+            	<a href="TiendaController?action=nuevo" class="btn btn-lg btn-primary btn-block text-uppercase font-weight-bold mb-2 text-light" type="submit">Registrate</a>
             </div>
             
             <div class="col-xs-12 col-sm-6 col-md-3 align-self-center">
