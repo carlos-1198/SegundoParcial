@@ -67,7 +67,7 @@ public class TiendaController extends HttpServlet{
 			throws ServletException, IOException {
 		
 		List <Tienda> listaTiendas = dao.list();
-		request.getSession().setAttribute("listTiendas", listaTiendas);
+		request.getSession().setAttribute("listaTiendas", listaTiendas);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
