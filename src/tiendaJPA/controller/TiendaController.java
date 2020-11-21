@@ -41,33 +41,17 @@ public class TiendaController extends HttpServlet{
 			case "insert":
 				registrarTienda(request, response);
 				break;
-				/*
-			case "buscar":
-				buscarHeroe(request, response);
+			case "login":
+				showLoginForm(request, response);
 				break;
-			
-			case "nuevo":
-				showNewForm(request, response);
+			case "ingresar":
+				ingresar(request, response);
 				break;
-			case "listar":
-				listarHeroes(request, response);
-				break;
-			case "edit":
-				editarHeroe(request, response);
-				break;
-			case "update":
-				updateHeroe(request, response);
-				break;
-			case "delete":
-				deleteHeroe(request, response);
-				break;
-			default:
-				index(request, response);
-				break;
-			*/
 		}
 	}
 	
+	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -97,9 +81,6 @@ public class TiendaController extends HttpServlet{
 	
 	public void registrarTienda(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-
-		//if (esValido(request.getParameter("nombre")) && esValido(request.getParameter("alias"))
-				//&& esValido(request.getParameter("estado")) && esValido(request.getParameter("genero"))) {
 		Tienda tienda = new Tienda();
 		tienda.setClave(request.getParameter("InputPassword"));
 		tienda.setDescripcion(request.getParameter("inputDescripcion"));
@@ -109,15 +90,28 @@ public class TiendaController extends HttpServlet{
 		tienda.setLema(request.getParameter("inputLema"));
 		tienda.setNombre(request.getParameter("inputNombre"));
 		tienda.setPropietario(request.getParameter("inputPropietario "));
-		tienda.setWeb(request.getParameter("inputWeb "));
-		
-
-		dao.insert(tienda);
-		
+		tienda.setWeb(request.getParameter("inputWeb "));		
+		dao.insert(tienda);		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-		//} else {
-			//request.getRequestDispatcher("index.jsp").forward(request, response);
-		//}
+
+	}
+	
+	private void showLoginForm(HttpServletRequest request, HttpServletResponse response)
+		    throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        dispatcher.forward(request, response);
+	}	
+	
+	private void ingresar(HttpServletRequest request, HttpServletResponse response) 
+			 throws ServletException, IOException {
+		Tienda tienda = new Tienda();
+		tienda = dao.find(request.getParameter("inputEmail"));
+		String correo = tienda.getEmail();
+		String password = request.getParameter("inputPassword");
+		if(password.contentEquals(tienda.getClave())) {
+			
+		}
+		
 	}
 	
 }

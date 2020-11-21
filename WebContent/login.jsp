@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Bienvenido</h3>
-              <form>
+              <form action="TiendaController?action=login" method="post">
                 <div class="form-label-group">
                   <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                   <label for="inputEmail">Email</label>
